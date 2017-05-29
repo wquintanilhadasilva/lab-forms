@@ -29,6 +29,6 @@
     <input required type="text" class="form-control" id="end" placeholder="Enderço" name="ender">
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button [disabled]="!f.valid" type="submit" class="btn btn-primary">Submit</button>
 
 </form>
