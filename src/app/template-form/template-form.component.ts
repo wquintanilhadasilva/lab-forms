@@ -68,6 +68,8 @@ export class TemplateFormComponent implements OnInit {
   populaDadosForm(dados, formulario: NgForm) {
 
     /*
+
+    // Força a atualização do objeto inteiro
     formulario.setValue({
       nome: formulario.value.nome,
       email: formulario.value.email,
