@@ -22,8 +22,6 @@ export class DataFormComponent implements OnInit {
       nome: [null],
       email: [null]
     });
-
-    this.formulario.
   }
 
 }
