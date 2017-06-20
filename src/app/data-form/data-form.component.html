@@ -22,7 +22,10 @@
   </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
+  <button class="btn" (click)="resetar()">Resetar</button>
 
 </form>
 
 <app-form-debug [form]="formulario"></app-form-debug>
+
+<pre>{{resposta | json}}</pre>

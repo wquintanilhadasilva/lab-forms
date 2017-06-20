@@ -33,13 +33,16 @@ export class TemplateFormComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form) {
-    console.log(form);
+  onSubmit(formulario) {
+    console.log(formulario);
     // console.log(this.usuario);
     // https://resttesttest.com/ para testes de rest
-    this.http.post('https://httpbin.org/post', JSON.stringify(form.value))
+    this.http.post('https://httpbin.org/post', JSON.stringify(formulario.value))
       .map(response => response)
-      .subscribe(dados => console.log(dados));
+      .subscribe(dados => {
+        console.log(dados);
+        formulario.form.reset();
+      });
   }
 
   consultaCEP(cep: string, form ) {

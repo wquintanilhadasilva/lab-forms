@@ -12,6 +12,8 @@ export class DataFormComponent implements OnInit {
 
   formulario: FormGroup;
 
+  resposta: any;
+
   constructor(
     private formBuilder: FormBuilder,
     private http: Http
@@ -34,8 +36,16 @@ export class DataFormComponent implements OnInit {
 
     this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
       .map(response => response)
-      .subscribe(dados => console.log(dados));
+      .subscribe(dados => {
+        console.log(dados);
+        this.resetar();
+        this.resposta = dados;
+      });
 
+  }
+
+  resetar() {
+    this.formulario.reset();
   }
 
 }
