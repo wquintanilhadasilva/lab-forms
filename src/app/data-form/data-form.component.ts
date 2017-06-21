@@ -31,7 +31,7 @@ export class DataFormComponent implements OnInit {
     });
   }
 
-  onSubmit(){
+  onSubmit() {
     console.log(this.formulario);
 
     this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
@@ -46,6 +46,25 @@ export class DataFormComponent implements OnInit {
 
   resetar() {
     this.formulario.reset();
+  }
+
+  aplicaCssErro(campo) {
+    return {
+      'has-error': this.verificaValidTouched(campo),
+       'has-feedback': this.verificaValidTouched(campo),
+    };
+  }
+
+  verificaValidTouched(campo) {
+    return this.verificaInValid(campo) && this.verificaTouched(campo);
+  }
+
+  verificaTouched(campo) {
+    return this.formulario.get(campo).touched && !this.formulario.get(campo).value;
+  }
+
+ verificaInValid(campo) {
+    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
   }
 
 }
