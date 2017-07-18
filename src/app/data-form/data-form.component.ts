@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-
 import { Http } from '@angular/http';
+
+import { DropdownService } from 'app/shared/services/dropdown.service';
+import { EstadoBr } from 'app/shared/models/estado-br';
 
 @Component({
   selector: 'app-data-form',
@@ -14,13 +16,17 @@ export class DataFormComponent implements OnInit {
 
   resposta: any;
 
+  estados: EstadoBr[];
+
   constructor(
     private formBuilder: FormBuilder,
-    private http: Http
+    private http: Http,
+    private dropdownService: DropdownService
   ) { }
 
   ngOnInit() {
 
+    this.dropdownService.getEstadosBr().subscribe(r => this.estados = r);
     /*this.formulario = new FormGroup({
       nome: new FormControl(null),
       email: new FormControl(null),
@@ -61,6 +67,9 @@ export class DataFormComponent implements OnInit {
   }
 
   verificaValidacoesDoFormulario(formGroup: FormGroup) {
+    /**
+     * Função recursiva que percorre todos os campos do form e marca os campos para validação
+     */
     Object.keys(formGroup.controls).forEach(campo => {
         console.log(campo);
         const controle = formGroup.get(campo);
