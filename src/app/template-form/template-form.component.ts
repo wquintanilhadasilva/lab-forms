@@ -4,6 +4,8 @@ import { NgForm } from '@angular/forms/forms';
 
 import 'rxjs/add/operator/map';
 
+import { ConsultaCepService } from './../shared/services/consulta-cep.service';
+
 @Component({
   selector: 'app-template-form',
   templateUrl: './template-form.component.html',
@@ -17,7 +19,7 @@ export class TemplateFormComponent implements OnInit {
     endereco: null
   };
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private consultaCepService: ConsultaCepService) { }
 
   verificaValidTouched(campo) {
     return !campo.valid && campo.touched;
@@ -46,26 +48,7 @@ export class TemplateFormComponent implements OnInit {
   }
 
   consultaCEP(cep: string, form ) {
-
-    // Nova variável "cep" somente com dígitos.
-    cep = cep.replace(/\D/g, '');
-
-    // Verifica se campo cep possui valor informado.
-    if (cep !== '') {
-
-        // Expressão regular para validar o CEP.
-        var validacep = /^[0-9]{8}$/;
-
-        // Valida o formato do CEP.
-        if (validacep.test(cep)) {
-
-            // Consulta o webservice viacep.com.br/
-            this.http.get(`//viacep.com.br/ws/${cep}/json/`)
-              .map(dados => dados.json())
-              .subscribe(dados => this.populaDadosForm(dados, form));
-        }
-    }
-
+    this.consultaCepService.consultaCEP(cep).subscribe(dados => this.populaDadosForm(dados, form));
   }
 
   populaDadosForm(dados, formulario: NgForm) {

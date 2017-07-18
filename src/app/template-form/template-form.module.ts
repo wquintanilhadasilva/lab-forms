@@ -8,9 +8,6 @@ import { TemplateFormComponent } from './template-form.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    HttpModule,
     SharedModule
   ],
   declarations: [
