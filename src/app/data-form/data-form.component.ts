@@ -46,14 +46,29 @@ export class DataFormComponent implements OnInit {
   onSubmit() {
     console.log(this.formulario);
 
-    this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
-      .map(response => response)
-      .subscribe(dados => {
-        console.log(dados);
-        this.resetar();
-        this.resposta = dados;
-      });
+    if (this.formulario.valid) {
+      this.http.post('https://httpbin.org/post', JSON.stringify(this.formulario.value))
+        .map(response => response)
+        .subscribe(dados => {
+          console.log(dados);
+          this.resetar();
+          this.resposta = dados;
+        });
+    }else {
+      console.log('formulário inválido');
+      this.verificaValidacoesDoFormulario(this.formulario);
+    }
+  }
 
+  verificaValidacoesDoFormulario(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(campo => {
+        console.log(campo);
+        const controle = formGroup.get(campo);
+        controle.markAsTouched();
+        if (controle instanceof FormGroup) {
+          this.verificaValidacoesDoFormulario(controle);
+        }
+      });
   }
 
   resetar() {
@@ -76,7 +91,7 @@ export class DataFormComponent implements OnInit {
   }
 
   verificaInValid(campo) {
-    return !this.formulario.get(campo).valid && this.formulario.get(campo).touched;
+    return !this.formulario.get(campo).valid && (this.formulario.get(campo).touched || this.formulario.get(campo).dirty);
   }
 
   consultaCEP() {
