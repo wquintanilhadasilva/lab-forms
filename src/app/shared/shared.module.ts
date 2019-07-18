@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { FormDebugComponent } from './form-debug/form-debug.component';
@@ -12,7 +12,7 @@ import { ConsultaCepService } from './services/consulta-cep.service';
   imports: [
     CommonModule,
     FormsModule,
-    HttpModule,
+    HttpClient,
     ReactiveFormsModule
   ],
   declarations: [
@@ -22,7 +22,7 @@ import { ConsultaCepService } from './services/consulta-cep.service';
   exports: [
     CommonModule,
     FormsModule,
-    HttpModule,
+    HttpClient,
     ReactiveFormsModule,
     CampoControlErroComponent,
     FormDebugComponent

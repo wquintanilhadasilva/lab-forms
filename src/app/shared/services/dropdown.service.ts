@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { EstadoBr } from 'app/shared/models/estado-br';
 
 @Injectable()
 export class DropdownService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   getEstadosBr() {
-    return this.http.get('assets/dados/estadosbr.json').map(r => r.json());
+    return this.http.get<EstadoBr[]>('assets/dados/estadosbr.json');
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { DropdownService } from 'app/shared/services/dropdown.service';
 import { EstadoBr } from 'app/shared/models/estado-br';
@@ -21,7 +21,7 @@ export class DataFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: Http,
+    private http: HttpClient,
     private dropdownService: DropdownService,
     private consultaCepService: ConsultaCepService
   ) { }

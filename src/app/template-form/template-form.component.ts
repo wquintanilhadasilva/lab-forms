@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms/forms';
 
 import 'rxjs/add/operator/map';
@@ -19,7 +19,7 @@ export class TemplateFormComponent implements OnInit {
     endereco: null
   };
 
-  constructor(private http: Http, private consultaCepService: ConsultaCepService) { }
+  constructor(private http: HttpClient, private consultaCepService: ConsultaCepService) { }
 
   verificaValidTouched(campo) {
     return !campo.valid && campo.touched;

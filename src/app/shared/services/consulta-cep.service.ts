@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class ConsultaCepService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   consultaCEP(cep): Observable<any> {
 
@@ -25,8 +25,7 @@ export class ConsultaCepService {
       if (validacep.test(cep)) {
 
         // Consulta o webservice viacep.com.br/
-        return this.http.get(`//viacep.com.br/ws/${cep}/json/`)
-          .map(dados => dados.json());
+        return this.http.get(`//viacep.com.br/ws/${cep}/json/`);
       }
     }
   }
